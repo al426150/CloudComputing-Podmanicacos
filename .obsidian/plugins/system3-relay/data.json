@@ -1,0 +1,103 @@
+{
+  "release": {
+    "channel": "stable"
+  },
+  "sharedFolders": [
+    {
+      "path": "Digital_Twins",
+      "guid": "5754dbc0-1e61-4013-99c2-3d0893a91a08",
+      "relay": "dee8aa57-4e55-4b84-b935-ba2fa91c7b0b",
+      "sync": {
+        "canvas": true,
+        "bases": true,
+        "images": true,
+        "audio": true,
+        "videos": true,
+        "pdfs": true,
+        "otherTypes": false
+      },
+      "remoteActivity": [
+        {
+          "guid": "2d9f32ae-9bf0-4bb3-8d7f-ff7a59aa745c",
+          "timestamp": 1794011618871
+        },
+        {
+          "guid": "a4fedeab-5888-45f2-9d1a-1b33ba5320d4",
+          "timestamp": 1794011344732
+        },
+        {
+          "guid": "9b151e17-af49-420f-9e30-40d985a5f3d7",
+          "timestamp": 1794010488655
+        },
+        {
+          "guid": "3de9354d-4f74-4b5e-9725-85e889024105",
+          "timestamp": 1794010450911
+        },
+        {
+          "guid": "2e00b907-78b5-43bb-bc13-b4c492d3c479",
+          "timestamp": 1794007749309
+        },
+        {
+          "guid": "546545fd-2cad-4167-93d2-a8d4e72c49cc",
+          "timestamp": 1794007223650
+        },
+        {
+          "guid": "d51de0ff-9c01-4fe0-b559-9c2f7a785458",
+          "timestamp": 1794007217969
+        },
+        {
+          "guid": "bdac985a-9343-41be-ae90-b03c59241df1",
+          "timestamp": 1794007201343
+        },
+        {
+          "guid": "f2c8c51d-6f31-471e-ae1b-31b1ccaf1155",
+          "timestamp": 1794007073011
+        },
+        {
+          "guid": "e199aa7a-594b-4240-abc6-8f3cb3475b98",
+          "timestamp": 1794007063209
+        },
+        {
+          "guid": "54197742-f98e-4918-8700-2fd693afc296",
+          "timestamp": 1794007055254
+        },
+        {
+          "guid": "5957df46-2d0e-4f10-9370-5bd2420a30c9",
+          "timestamp": 1794004887485
+        },
+        {
+          "guid": "144dc9af-dd16-4ef8-9438-4d8e36b85f31",
+          "timestamp": 1794002277902
+        },
+        {
+          "guid": "0f77ed2c-91e1-405d-9282-000d072072e8",
+          "timestamp": 1794001705793
+        }
+      ]
+    }
+  ],
+  "endpoints": {},
+  "enableDocumentStatus": false,
+  "enableNewLinkFormat": false,
+  "enableDiffLinkStatus": false,
+  "enableDiscordLogin": false,
+  "enableDeviceManagement": true,
+  "enableResourceMeter": false,
+  "enableDeltaLogging": false,
+  "enableNetworkLogging": false,
+  "enableVerifyUploads": false,
+  "enableHSMRecording": false,
+  "enableHSMResourceContracts": false,
+  "enableDraftMode": false,
+  "enableFolderIdbMigration": false,
+  "enableMetadataHealthNotice": true,
+  "enableNoteStateInspector": false,
+  "enableSavingFlagPolyfill": true,
+  "enableFrontmatterDuplicateRecovery": false,
+  "enableSingleUserHistory": true,
+  "enableStreamerMode": false,
+  "debugging": false,
+  "login": {
+    "provider": "github"
+  }
+}

@@ -1,0 +1,230 @@
+{
+  "main": {
+    "id": "33052a816af53f7e",
+    "type": "split",
+    "children": [
+      {
+        "id": "3e61779e13452426",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "988124b78a443aa4",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Digital_Twins/Digital_Twins_Intro/01_Definition and Fundaments/Clarification/Digital Twin vs. Digital Thread.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Digital Twin vs. Digital Thread"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "92fbc6fde93e3f98",
+    "type": "split",
+    "children": [
+      {
+        "id": "4e585918321463a1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "48f050008666fda3",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Explorador de archivos"
+            }
+          },
+          {
+            "id": "bf359d7d68323ce4",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Buscar"
+            }
+          },
+          {
+            "id": "81b965193609faf3",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-bookmark",
+              "title": "Marcadores"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 226.6429100036621
+  },
+  "right": {
+    "id": "5c93f1ca06f66690",
+    "type": "split",
+    "children": [
+      {
+        "id": "475d29d8f2f5c691",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1e686f9aac6405e7",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Enlaces entrantes"
+            }
+          },
+          {
+            "id": "614e27a81a7fdca1",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Enlaces salientes"
+            }
+          },
+          {
+            "id": "ad6fced1896b94d6",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Etiquetas"
+            }
+          },
+          {
+            "id": "a6ab7f8401392c83",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Todas las propiedades"
+            }
+          },
+          {
+            "id": "2d879e6605763f90",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Esquema"
+            }
+          },
+          {
+            "id": "4f9f0cac0d711fad",
+            "type": "leaf",
+            "state": {
+              "type": "system3-sync-status",
+              "state": {},
+              "icon": "satellite",
+              "title": "Sync status"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Abrir selector rápido": false,
+      "graph:Abrir vista gráfica": false,
+      "canvas:Crear nuevo lienzo": false,
+      "daily-notes:Abrir la nota de hoy": false,
+      "templates:Insertar plantilla": false,
+      "command-palette:Abrir paleta de comandos": false,
+      "bases:Crear nueva base": false,
+      "system3-relay:Relay": false
+    }
+  },
+  "active": "988124b78a443aa4",
+  "lastOpenFiles": [
+    "Digital_Twins/Digital_Twins_Intro/01_Definition and Fundaments/Clarification/Differences (Digital Twin vs. Simulation vs. 3D Model).md",
+    "Digital_Twins/Digital_Twins_Intro/01_Definition and Fundaments/Clarification/Digital Twin vs. Digital Thread.md",
+    "Digital_Twins/Digital_Twins_Intro/01_Definition and Fundaments/Core Architecture/Bidirectional Data Loop (Closed-Loop Feedback).md",
+    "Digital_Twins/Digital_Twins_Intro/01_Definition and Fundaments/Core Architecture/Key Components of a Digital Twin.md",
+    "Digital_Twins/Digital_Twins_Intro/01_Definition and Fundaments/Essential Concepts/History and Origin (Michael Grieves and NASA).md",
+    "Digital_Twins/Digital_Twins_Intro/01_Definition and Fundaments/Essential Concepts/What is a Digital Twin.md",
+    "Digital_Twins/Digital_Twins_Intro/06_Sources/IBM -  What is a Digital Twin.md",
+    "Digital_Twins/Digital_Twins_Intro/06_Sources/Draft Space Technology Roadmap Modeling, Simulation, Information Technology & Processing Roadmap.md",
+    "Digital_Twins/Digital_Twins_Intro/06_Sources/Digital Twin Mitigating Unpredictable, Undesirable Emergent Behavior in Complex Systems.md",
+    "Digital_Twins/Digital_Twins_Intro/06_Sources/Digital Twin in manufacturing A categorical literature review and classification.md",
+    "Digital_Twins/Digital_Twins_Intro/06_Sources/Digital Twin and Digital Thread A Unified Architectural Approach.md",
+    "IBM - What is a Digital Twin.md",
+    "Draft Space Technology Roadmap (NASA TA11).md",
+    "Digital_Twins/Digital_Twins_Intro/00_MOC - Digital Twins.md",
+    "History and Origins (Michael Grieves and NASA).md",
+    "Digital_Twins/Digital_Twins_Intro/06_Sources/IBM - What is a Digital Twin.md",
+    "Digital_Twins/Digital_Twins_Intro/01_Definición y Fundamentos/Concepto Esencial/Componentes clave.md",
+    "Digital_Twins/Digital_Twins_Intro/01_Definition and Fundaments/Clarification",
+    "Digital_Twins/Digital_Twins_Intro/01_Definition and Fundaments/Core Architecture",
+    "Digital_Twins/Digital_Twins_Intro/01_Definition and Fundaments/Essential Concepts",
+    "Digital_Twins/Digital_Twins_Intro/06_Sources",
+    "Digital_Twins/Digital_Twins_Intro/Tipos",
+    "Digital_Twins/Digital_Twins_Intro/01_Definition and Fundaments",
+    "Introduction.md",
+    "cree un enlace.md",
+    "Digital_Twins/Digital_Twins_Intro",
+    "Sin nombre",
+    "Digital_Twins"
+  ]
+}
