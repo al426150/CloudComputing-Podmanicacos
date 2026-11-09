@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gemelo digital · Aula UJI</title>
+<script src="https://cdn.jsdelivr.net/npm/mqtt@5.10.1/dist/mqtt.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+<style>
+  :root {
+    --bg: #f4f6f8; --card: #ffffff; --ink: #1d2330; --quiet: #667085; --line: #e3e7ec;
+    --accent: #2f6fde; --good: #1f9d55; --warn: #d97706; --bad: #d64545;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #11151c; --card: #1a2029; --ink: #e8ecf2; --quiet: #98a2b3; --line: #2a323d; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+         background: var(--bg); color: var(--ink); }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px 40px; }
+  header { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+  h1 { font-size: 22px; margin: 0; }
+  .sub { color: var(--quiet); font-size: 14px; margin-top: 4px; }
+  .pill { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px;
+          background: var(--card); border: 1px solid var(--line); font-size: 13px; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--quiet); }
+  .dot.on { background: var(--good); box-shadow: 0 0 0 4px rgba(31,157,85,.15); }
+  .dot.off { background: var(--bad); }
+  .alert { display: none; margin-top: 20px; padding: 14px 16px; border-radius: 10px; font-weight: 600;
+           background: rgba(214,69,69,.12); border: 1px solid var(--bad); color: var(--bad); }
+  .alert.show { display: block; animation: pulse 1.4s infinite; }
+  @keyframes pulse { 50% { opacity: .65; } }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 20px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+  .label { color: var(--quiet); font-size: 13px; }
+  .value { font-size: 34px; font-weight: 700; margin-top: 6px; font-variant-numeric: tabular-nums; }
+  .unit { font-size: 15px; color: var(--quiet); font-weight: 500; margin-left: 4px; }
+  .bar { height: 6px; border-radius: 3px; background: var(--line); margin-top: 12px; overflow: hidden; }
+  .bar > div { height: 100%; width: 0; background: var(--good); transition: width .4s, background .4s; }
+  .control { display: flex; flex-direction: column; justify-content: space-between; gap: 12px; }
+  button { font: inherit; font-weight: 600; font-size: 15px; padding: 12px; border-radius: 10px; border: 0;
+           cursor: pointer; background: var(--accent); color: #fff; }
+  button.stop { background: var(--quiet); }
+  button:disabled { opacity: .5; cursor: not-allowed; }
+  .charts { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-top: 16px; }
+  .chartbox { position: relative; height: 280px; }
+  h2 { font-size: 15px; margin: 0 0 10px; }
+  #log { font-family: ui-monospace, Consolas, monospace; font-size: 12.5px; color: var(--quiet);
+         height: 280px; overflow-y: auto; margin: 0; padding: 0; list-style: none; }
+  #log li { padding: 3px 0; border-bottom: 1px dashed var(--line); }
+  #log li.cmd { color: var(--accent); font-weight: 600; }
+  #log li.warn { color: var(--bad); font-weight: 600; }
+  footer { margin-top: 16px; color: var(--quiet); font-size: 12.5px; }
+  code { font-size: 12px; }
+  @media (max-width: 860px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+    .charts { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Gemelo digital · Aula 1 UJI</h1>
+      <div class="sub">Sensor simulado → broker MQTT en la nube → este dashboard → comando de vuelta</div>
+    </div>
+    <div class="pill"><span id="connDot" class="dot"></span><span id="connText">Conectando…</span></div>
+  </header>
+
+  <div id="alert" class="alert">⚠ CO₂ por encima de 1000 ppm: calidad del aire mala. Hay que ventilar.</div>
+
+  <section class="grid">
+    <div class="card">
+      <div class="label">CO₂</div>
+      <div class="value"><span id="co2">--</span><span class="unit">ppm</span></div>
+      <div class="bar"><div id="co2Bar"></div></div>
+    </div>
+    <div class="card">
+      <div class="label">Temperatura</div>
+      <div class="value"><span id="temp">--</span><span class="unit">°C</span></div>
+    </div>
+    <div class="card">
+      <div class="label">Humedad</div>
+      <div class="value"><span id="hum">--</span><span class="unit">%</span></div>
+    </div>
+    <div class="card control">
+      <div>
+        <div class="label">Ventilación (estado real del sensor)</div>
+        <div class="value" id="ventState" style="font-size:24px">--</div>
+      </div>
+      <button id="btn" disabled>Ventilar</button>
+    </div>
+  </section>
+
+  <section class="charts">
+    <div class="card">
+      <h2>CO₂ en tiempo real</h2>
+      <div class="chartbox"><canvas id="chartCo2"></canvas></div>
+    </div>
+    <div class="card">
+      <h2>Registro de eventos</h2>
+      <ul id="log"></ul>
+    </div>
+  </section>
+
+  <footer>
+    Broker: <code id="brokerTxt"></code> · Topic: <code id="topicTxt"></code> ·
+    Última lectura: <span id="last">—</span>
+  </footer>
+</div>
+
+<script>
+  // Configuración (se puede cambiar con ?broker=...&topic=... en la URL)
+  const params = new URLSearchParams(location.search);
+  const BROKER = params.get("broker") || "wss://broker.hivemq.com:8884/mqtt";
+  const TOPIC = params.get("topic") || "uji-ccdt-podmanicacos/aula1";
+  const T_SENS = TOPIC + "/sensores", T_CMD = TOPIC + "/comandos";
+  const UMBRAL = 1000, MAX_PUNTOS = 60;
+
+  const $ = id => document.getElementById(id);
+  $("brokerTxt").textContent = BROKER;
+  $("topicTxt").textContent = TOPIC;
+
+  function log(text, cls) {
+    const li = document.createElement("li");
+    li.textContent = new Date().toLocaleTimeString() + "  " + text;
+    if (cls) li.className = cls;
+    $("log").prepend(li);
+    while ($("log").children.length > 80) $("log").lastChild.remove();
+  }
+
+  // Gráfica
+  const css = getComputedStyle(document.documentElement);
+  const chart = new Chart($("chartCo2"), {
+    type: "line",
+    data: { labels: [], datasets: [
+      { label: "CO₂ (ppm)", data: [], borderColor: "#2f6fde", backgroundColor: "rgba(47,111,222,.12)",
+        fill: true, tension: .3, pointRadius: 0, borderWidth: 2 },
+      { label: "Umbral 1000 ppm", data: [], borderColor: "#d64545", borderDash: [6, 6],
+        pointRadius: 0, borderWidth: 1.5, fill: false }
+    ]},
+    options: {
+      animation: false, maintainAspectRatio: false,
+      scales: {
+        x: { ticks: { color: css.getPropertyValue("--quiet"), maxTicksLimit: 6 }, grid: { display: false } },
+        y: { suggestedMin: 400, suggestedMax: 1400, ticks: { color: css.getPropertyValue("--quiet") },
+             grid: { color: css.getPropertyValue("--line") } }
+      },
+      plugins: { legend: { labels: { color: css.getPropertyValue("--quiet"), boxWidth: 12 } } }
+    }
+  });
+
+  // Estado
+  let ventilando = false, alertaActiva = false;
+
+  function pintar(d) {
+    $("co2").textContent = d.co2;
+    $("temp").textContent = d.temp.toFixed(1);
+    $("hum").textContent = d.hum.toFixed(1);
+    $("last").textContent = new Date(d.ts * 1000).toLocaleTimeString();
+
+    const pct = Math.min(100, (d.co2 - 400) / (1500 - 400) * 100);
+    const color = d.co2 > UMBRAL ? "var(--bad)" : d.co2 > 800 ? "var(--warn)" : "var(--good)";
+    $("co2Bar").style.width = pct + "%";
+    $("co2Bar").style.background = color;
+    $("co2").style.color = color;
+
+    if (d.co2 > UMBRAL && !alertaActiva) { alertaActiva = true; log("ALERTA: CO₂ " + d.co2 + " ppm", "warn"); }
+    if (d.co2 <= UMBRAL && alertaActiva) { alertaActiva = false; log("CO₂ de nuevo bajo el umbral"); }
+    $("alert").classList.toggle("show", alertaActiva);
+
+    if (d.ventilando !== ventilando) log("Sensor confirma ventilación " + (d.ventilando ? "ABIERTA" : "CERRADA"));
+    ventilando = !!d.ventilando;
+    $("ventState").textContent = ventilando ? "Abierta" : "Cerrada";
+    $("ventState").style.color = ventilando ? "var(--good)" : "var(--quiet)";
+    $("btn").textContent = ventilando ? "Parar ventilación" : "Ventilar";
+    $("btn").classList.toggle("stop", ventilando);
+
+    const t = new Date(d.ts * 1000).toLocaleTimeString();
+    chart.data.labels.push(t);
+    chart.data.datasets[0].data.push(d.co2);
+    chart.data.datasets[1].data.push(UMBRAL);
+    if (chart.data.labels.length > MAX_PUNTOS) {
+      chart.data.labels.shift(); chart.data.datasets.forEach(ds => ds.data.shift());
+    }
+    chart.update();
+  }
+
+  // MQTT
+  const client = mqtt.connect(BROKER, {
+    clientId: "dashboard-" + Math.random().toString(16).slice(2, 8),
+    reconnectPeriod: 2000, connectTimeout: 10000
+  });
+
+  client.on("connect", () => {
+    $("connDot").className = "dot on";
+    $("connText").textContent = "Conectado al broker";
+    $("btn").disabled = false;
+    client.subscribe(T_SENS);
+    log("Conectado a " + BROKER);
+    log("Esperando datos del sensor…");
+  });
+  client.on("reconnect", () => { $("connText").textContent = "Reconectando…"; });
+  client.on("offline", () => {
+    $("connDot").className = "dot off"; $("connText").textContent = "Sin conexión"; $("btn").disabled = true;
+  });
+  client.on("error", e => log("Error: " + e.message, "warn"));
+
+  let primero = true;
+  client.on("message", (topic, payload) => {
+    try {
+      const d = JSON.parse(payload.toString());
+      if (primero) { log("Primer dato recibido del sensor"); primero = false; }
+      pintar(d);
+    } catch (e) { log("Mensaje no válido: " + payload, "warn"); }
+  });
+
+  $("btn").addEventListener("click", () => {
+    const cmd = ventilando ? "parar" : "ventilar";
+    client.publish(T_CMD, cmd);
+    log("Comando enviado al sensor: " + cmd.toUpperCase(), "cmd");
+  });
+</script>
+</body>
+</html>
