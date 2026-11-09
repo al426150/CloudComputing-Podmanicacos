@@ -11,14 +11,14 @@
             "id": "988124b78a443aa4",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "split-diff-view",
               "state": {
-                "file": "Digital_Twins/Digital_Twins_Intro/01_Definition and Fundaments/Clarification/Digital Twin vs. Digital Thread.md",
-                "mode": "source",
-                "source": false
+                "aFile": ".obsidian/community-plugins.json",
+                "bFile": ".obsidian/community-plugins.json",
+                "aRef": ""
               },
-              "icon": "lucide-file",
-              "title": "Digital Twin vs. Digital Thread"
+              "icon": "diff",
+              "title": "Diff: community-plugins.json  (Working Tree)"
             }
           }
         ]
@@ -168,21 +168,21 @@
             }
           },
           {
-            "id": "4f9f0cac0d711fad",
+            "id": "a0c19c7e33b97513",
             "type": "leaf",
             "state": {
-              "type": "system3-sync-status",
+              "type": "git-view",
               "state": {},
-              "icon": "satellite",
-              "title": "Sync status"
+              "icon": "git-pull-request",
+              "title": "Source Control"
             }
           }
-        ]
+        ],
+        "currentTab": 5
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 390.833251953125
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -193,13 +193,14 @@
       "templates:Insertar plantilla": false,
       "command-palette:Abrir paleta de comandos": false,
       "bases:Crear nueva base": false,
-      "system3-relay:Relay": false
+      "system3-relay:Relay": false,
+      "obsidian-git:Open Git source control": false
     }
   },
   "active": "988124b78a443aa4",
   "lastOpenFiles": [
-    "Digital_Twins/Digital_Twins_Intro/01_Definition and Fundaments/Clarification/Differences (Digital Twin vs. Simulation vs. 3D Model).md",
     "Digital_Twins/Digital_Twins_Intro/01_Definition and Fundaments/Clarification/Digital Twin vs. Digital Thread.md",
+    "Digital_Twins/Digital_Twins_Intro/01_Definition and Fundaments/Clarification/Differences (Digital Twin vs. Simulation vs. 3D Model).md",
     "Digital_Twins/Digital_Twins_Intro/01_Definition and Fundaments/Core Architecture/Bidirectional Data Loop (Closed-Loop Feedback).md",
     "Digital_Twins/Digital_Twins_Intro/01_Definition and Fundaments/Core Architecture/Key Components of a Digital Twin.md",
     "Digital_Twins/Digital_Twins_Intro/01_Definition and Fundaments/Essential Concepts/History and Origin (Michael Grieves and NASA).md",
